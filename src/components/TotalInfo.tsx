@@ -1,38 +1,34 @@
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { Button, Modal, Space } from "antd";
 
+import { useContext } from "react";
+import { ITodoList, TaskContext } from "../context/taskListProvider";
+
 const { confirm } = Modal;
 
-export default function TotalInfo({
-  tasksList,
-  setTasksList,
-}: {
-  tasksList: any;
-  setTasksList: (state: any) => void;
-}) {
-  const completedAllTaskHandler = () => {
-    const completedTask = tasksList.map((task: any) => {
-      return { ...task, completed: true };
-    });
-    setTasksList(completedTask);
-  };
+export default function TotalInfo() {
+  const { tasksList, completeAll } = useContext(TaskContext);
 
   const showConfirm = () => {
     confirm({
       title: "Вы уверены что хотите отметить все как выполненные?",
       icon: <ExclamationCircleFilled />,
       onOk() {
-        completedAllTaskHandler();
+        completeAll();
       },
     });
   };
 
+  const totalInfo = tasksList.filter(
+    (task: ITodoList) => task.completed
+  ).length;
+
   return (
-    <Space style={{ display: "flex", justifyContent: "space-between" }}>
-      <Space direction="horizontal">{`Выполненно: ${
-        tasksList.filter((task: any) => task.completed).length
-      } из ${tasksList.length}`}</Space>
-      <Button type="primary" onClick={() => showConfirm()}>
+    <Space className="todo-total-info_wallpaper">
+      <span>
+        Выполненно: {totalInfo} из {tasksList.length}
+      </span>
+      <Button type="primary" onClick={showConfirm}>
         Выполнить все
       </Button>
     </Space>

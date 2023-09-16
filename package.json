@@ -14,7 +14,8 @@
     "@types/antd": "^1.0.0",
     "antd": "^5.9.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sass": "^1.67.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
