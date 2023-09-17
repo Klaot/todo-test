@@ -54,5 +54,6 @@ export const useTasks = () => {
     addTasks,
     tasksList,
     completeAll,
+    setTasksList,
   };
 };
